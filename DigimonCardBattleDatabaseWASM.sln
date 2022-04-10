@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31825.309
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigimonCardBattleDatabase", "DigimonCardBattleDatabase\DigimonCardBattleDatabase.csproj", "{87C4CB07-BB22-4755-9441-EF826791259E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigimonCardBattleDatabase", "DigimonCardBattleDatabase\DigimonCardBattleDatabase.csproj", "{87C4CB07-BB22-4755-9441-EF826791259E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigimonCardBattleDatabase.Tests", "DigimonCardBattleDatabase.Tests\DigimonCardBattleDatabase.Tests.csproj", "{C657B123-B837-4952-AA30-39290E96206D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigimonCardBattleDatabase.Tests", "DigimonCardBattleDatabase.Tests\DigimonCardBattleDatabase.Tests.csproj", "{C657B123-B837-4952-AA30-39290E96206D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

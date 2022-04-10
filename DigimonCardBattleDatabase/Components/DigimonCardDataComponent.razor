@@ -1,0 +1,16 @@
+﻿@inject NavigationManager NavigationManager
+ <div class="product-card" >
+    <div class="card" style="width: 18rem;" @onclick="ToggleButtonVisiblity">
+        <img class="card-img-top" src=@("Images/"+@CardData.Number.Trim()+".png") alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">@CardData.Name</h5>
+            <p class="card-text">@CardData.Number</p>
+            <p class="card-text">@CardData.ToString()</p>
+        </div>
+        
+    </div>
+    @if(isButtonVisible)
+    {
+        <button class="btn btn-primary" @onclick="FusionClickEvent" >Fusion</button>
+    }
+</div>

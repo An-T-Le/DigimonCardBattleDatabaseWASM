@@ -1,0 +1,18 @@
+﻿@page "/fusion/{CardId:int}"
+@inject HttpClient Http
+@using DigimonCardBattleDatabase.Components
+@using DigimonCardBattleDatabase.Classes
+
+<PageTitle>Fusion</PageTitle>
+@if (data == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+  <div class="container" style="text-align:center;"> 
+        
+        <DigimonCardDataComponent CardData=CardData/>
+        
+    </div>
+}
