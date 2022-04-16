@@ -30,21 +30,27 @@ namespace DigimonCardBattleDatabase.Classes
         public string? Effect { get; set; }
         public int FusionMaterialPoints { get; set; }
         public int FusionMaterialCost { get; set; }
-        private string temp = " test ";
 
         override
         public string ToString()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("Name:" + Name);
-            sb.Append(" Number:" + Number);
-            sb.Append(", HP:" + Hp);
-            sb.Append(", DP:" + Dp);
-            sb.Append(", PP:" + Pp);
-            sb.Append(", Support:" + Support);
-            sb.Append(", Effect:" + Effect);
-            sb.Append(", Fusion Material points:" + FusionMaterialPoints);
-            sb.Append(", Fusion Material Cost:" + FusionMaterialCost);
+            sb.Append("\n Number:" + Number);
+            if (Specialty != null)
+            {
+                sb.Append("\n HP:" + Hp);
+                sb.Append("\n DP:" + Dp);
+                sb.Append("\n PP:" + Pp);
+                sb.Append("\n Support:" + Support);
+
+            }
+            else
+            {
+                sb.Append("\n Effect:" + Effect);
+            }
+            sb.Append("\n Fusion Material points:" + FusionMaterialPoints);
+            sb.Append("\n Fusion Material Cost:" + FusionMaterialCost);
 
             return (sb.ToString());
         }

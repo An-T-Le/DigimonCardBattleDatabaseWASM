@@ -14,11 +14,15 @@
     <p><em>Loading...</em></p>
 }
 else
-{<div class="grid-container" style="text-align:center;"> 
+{<div class="container-fluid" style="text-align:center;"> 
+    <div class="row">
         @foreach(DigimonCardData _data in data)
         {
-        <DigimonCardDataComponent CardData=_data/>
+            <div class="col">
+                <DigimonCardDataComponent CardData=_data/>
+            </div>
         }
+        </div>
     </div>
 }
 

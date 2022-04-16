@@ -5,12 +5,25 @@
         <div class="card-body">
             <h5 class="card-title">@CardData.Name</h5>
             <p class="card-text">@CardData.Number</p>
-            <p class="card-text">@CardData.ToString()</p>
+            @if (@CardData.Specialty != null)
+            {
+                <body class="card-body" style="text-align:left">
+                <p class="card-text">HP: @CardData.Hp<br>PP: @CardData.Pp<br>Circle Attack: @CardData.C_pow<br>Triangle Attack: @CardData.T_pow<br>X Attack: @CardData.X_pow<br>X Effect: @CardData.X_effect</p>       
+            </body>       
+            }
+            else
+            {
+                <p class="card-text">Effect: @CardData.Effect</p>
+            }
+            <p class="card-text">Fusion Total: @CardData.FusionMaterialCost</p>
+                <p class="card-text">Material Points: @CardData.FusionMaterialPoints</p>
+                
+
         </div>
-        
-    </div>
-    @if(isButtonVisible)
+      @if(isButtonVisible)
     {
         <button class="btn btn-primary" @onclick="FusionClickEvent" >Fusion</button>
-    }
+    }  
+    </div>
+    
 </div>

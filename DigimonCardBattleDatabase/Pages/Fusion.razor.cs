@@ -7,7 +7,8 @@ namespace DigimonCardBattleDatabase.Pages
     public partial class Fusion : ComponentBase
     {
         [Parameter]
-        public int CardId { get; set; }
+        //Set to -1 to indicate there is no value
+        public int CardId { get; set; } = -1;
 
         [Parameter]
         public DigimonCardData? CardData { get; set; }
@@ -16,11 +17,14 @@ namespace DigimonCardBattleDatabase.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            data = await Http.GetFromJsonAsync<DigimonCardData[]>("Data/DigimonCardData.json");
-            if (data != null)
+            if (CardId >= 0)
             {
-                Console.WriteLine("data:" + data.Count());
-                CardData = data[CardId];
+                data = await Http.GetFromJsonAsync<DigimonCardData[]>("Data/DigimonCardData.json");
+                if (data != null)
+                {
+                    Console.WriteLine("data:" + data.Count());
+                    CardData = data[CardId];
+                }
             }
         }
 
