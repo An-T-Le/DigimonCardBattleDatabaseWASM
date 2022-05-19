@@ -15,9 +15,10 @@ namespace DigimonCardBattleDatabase.Pages
 
         private DigimonCardData[]? data;
 
+        private FusionManager? _fusionManager;
         protected override async Task OnInitializedAsync()
         {
-            if (CardId >= 0)
+            if (CardId >= 0)//95148sanjose
             {
                 data = await Http.GetFromJsonAsync<DigimonCardData[]>("Data/DigimonCardData.json");
                 if (data != null)
@@ -25,6 +26,8 @@ namespace DigimonCardBattleDatabase.Pages
                     Console.WriteLine("data:" + data.Count());
                     CardData = data[CardId];
                 }
+
+                _fusionManager = new FusionManager(CardData,data);
             }
         }
 
