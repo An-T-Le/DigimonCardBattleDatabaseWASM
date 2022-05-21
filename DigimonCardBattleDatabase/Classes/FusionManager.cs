@@ -5,7 +5,7 @@
 
         private DigimonCardData _targetCard;
         private Dictionary<string,List<DigimonCardData>> _cardDatabase;
-        
+        private DigimonCardFusionCombinations _digimonCardFusionCombinations;
         private FusionTree _fusionTree;
         private List<string> _excludeList = new List<string>();
         private Dictionary<string, Dictionary<string, string>> _fusiontypeResults = new Dictionary<string, Dictionary<string, string>>
@@ -60,6 +60,7 @@
         {
             _targetCard = targetCard;
             _fusionTree = new FusionTree(_targetCard);
+            _digimonCardFusionCombinations = new DigimonCardFusionCombinations();
             _cardDatabase = new Dictionary<string, List<DigimonCardData>>
             {
                 {
@@ -81,9 +82,17 @@
                     "Option",new List<DigimonCardData>()
                 },
             };
+            string[,] combinations = _digimonCardFusionCombinations.FusionResultsDictionary[targetCard.Specialty];
+            
+            //foreach (string combination in combinations)
+            //{
+            //    Console.WriteLine(combination);
+            //}
+
             
             FilterCardList(cardDatabase);
-            Console.Out.WriteLine(_cardDatabase.ToString());
+            GenerateFusionRecipe(_fusionTree);
+            
         }
 
         private void FilterCardList(DigimonCardData[] cardDatabase)
@@ -97,7 +106,7 @@
         {
 
             //fusionTree.LeftMaterial
-            return (fusionTree);
+            return (RecursiveFusionSearch(fusionTree));
         }
         private FusionTree RecursiveFusionSearch(FusionTree fusionTree)
         {
@@ -126,9 +135,38 @@
 
         private DigimonCardData[] FindFusionCadidates(DigimonCardData targetCard)
         {
-            DigimonCardData[] result = new DigimonCardData[2];
+            DigimonCardData[] results = new DigimonCardData[2];
+            int[] targetFusionCosts = new int[2];
+            string[,] combinations = _digimonCardFusionCombinations.FusionResultsDictionary[targetCard.Specialty];
+            
+            //calculate the fusion material cost.
+            //If divides evenly, do so, else divide by 2 and use math.ceiling/floor for each cost
+            if(targetCard.FusionMaterialCost % 2 == 0)
+            {
+                targetFusionCosts[0] = targetCard.FusionMaterialCost/2;
+                targetFusionCosts[1] = targetCard.FusionMaterialCost/2;
+            }
+            else 
+            {
 
-            return (result);
+                targetFusionCosts[0] = (int)Math.Ceiling((double) targetCard.FusionMaterialCost / 2);
+                targetFusionCosts[1] = (int)Math.Floor((double)targetCard.FusionMaterialCost / 2); 
+            }
+
+            for (int i = 0; i < results.Length; i++)
+            {
+                for (int j = 0; j < _cardDatabase[combinations[0,i]].Count; j++)
+                {
+                    if(_cardDatabase[combinations[0,i]][j].FusionMaterialPoints == targetFusionCosts[i])
+                    {
+                        results[i] = _cardDatabase[combinations[0,i]][j];
+                    }
+                }
+            }
+            //Console.WriteLine(targetFusionCosts[0] + " " + targetFusionCosts[1]);
+            Console.WriteLine(results[0].Name + " " + results[1].Name);
+
+            return (results);
         }
     }
 }
