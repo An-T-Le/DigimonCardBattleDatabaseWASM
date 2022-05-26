@@ -57,7 +57,7 @@
             {
             { "Fire",new string[,]
                 {
-                    {"Fire","Option"  } ,
+                    //{"Fire","Option"  } ,
                     {"Ice","Darkness"},
                     {"Rare","Darkness"},
                 }
@@ -65,7 +65,7 @@
             { "Ice",new string[,]
                 {
                     {"Fire","Rare"},
-                    {"Ice","Option"},
+                    //{"Ice","Option"},
                     {"Nature","Darkness"}
                 }
             },
@@ -73,21 +73,21 @@
                 {
                     {"Fire","Ice"},
                     {"Ice","Rare"},
-                    {"Nature","Option"}
+                    //{"Nature","Option"}
                 }
             },
             { "Darkness",new string[,]
                 {
                     {"Fire","Nature"},
                     {"Nature","Rare"},
-                    {"Darkness","Option"}
+                    //{"Darkness","Option"}
                 }
             },
             { "Rare",new string[,]
                 {
                     {"Fire","Darkness"},
                     {"Ice","Nature"},
-                    {"Rare","Option"}
+                    //{"Rare","Option"}
                 }
             },
             { "Option",new string[,]

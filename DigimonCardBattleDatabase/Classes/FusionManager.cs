@@ -110,9 +110,10 @@
         }
         private FusionTree RecursiveFusionSearch(FusionTree fusionTree)
         {
-            DigimonCardData[] digimonCardDatas = FindFusionCadidates(fusionTree.cardData);            
-            
-            if(digimonCardDatas[0].FusionMaterialCost > 4)
+            DigimonCardData[] digimonCardDatas = FindFusionCadidates(fusionTree.cardData);
+
+            Console.WriteLine("Left material recusion activated");
+            if(!digimonCardDatas[0].Level.Equals("R") || digimonCardDatas[0].FusionMaterialCost > 10)
             {
                 fusionTree.LeftMaterial = RecursiveFusionSearch( new FusionTree(digimonCardDatas[0]));
             }
@@ -121,7 +122,9 @@
                 fusionTree.LeftMaterial = new FusionTree(digimonCardDatas[0]);
             }
 
-            if (digimonCardDatas[1].FusionMaterialCost > 4)
+            Console.WriteLine("Right material recusion activated");
+
+            if (!digimonCardDatas[1].Level.Equals("R") || digimonCardDatas[1].FusionMaterialCost > 10)
             {
                 fusionTree.RightMaterial = RecursiveFusionSearch(new FusionTree(digimonCardDatas[1]));
             }
@@ -136,22 +139,16 @@
         private DigimonCardData[] FindFusionCadidates(DigimonCardData targetCard)
         {
             DigimonCardData[] results = new DigimonCardData[2];
-            int[] targetFusionCosts = new int[2];
+             int[] targetFusionCosts = new int[2];
             string[,] combinations = _digimonCardFusionCombinations.FusionResultsDictionary[targetCard.Specialty];
             
             //calculate the fusion material cost.
-            //If divides evenly, do so, else divide by 2 and use math.ceiling/floor for each cost
-            if(targetCard.FusionMaterialCost % 2 == 0)
-            {
-                targetFusionCosts[0] = targetCard.FusionMaterialCost/2;
-                targetFusionCosts[1] = targetCard.FusionMaterialCost/2;
-            }
-            else 
-            {
-
-                targetFusionCosts[0] = (int)Math.Ceiling((double) targetCard.FusionMaterialCost / 2);
-                targetFusionCosts[1] = (int)Math.Floor((double)targetCard.FusionMaterialCost / 2); 
-            }
+            //use math.ceiling/floor for each cost and add/subtract 1 to prevent infinite loop
+            // Clamp to not go below 2
+            
+            targetFusionCosts[0] = Math.Clamp((int)Math.Ceiling((double) targetCard.FusionMaterialCost / 2) ,2,999);
+            targetFusionCosts[1] = Math.Clamp((int)Math.Floor((double)targetCard.FusionMaterialCost / 2) ,2,999); 
+            
 
             for (int i = 0; i < results.Length; i++)
             {
@@ -163,8 +160,8 @@
                     }
                 }
             }
-            //Console.WriteLine(targetFusionCosts[0] + " " + targetFusionCosts[1]);
-            Console.WriteLine(results[0].Name + " " + results[1].Name);
+            Console.WriteLine(targetFusionCosts[0] + " " + targetFusionCosts[1]);
+            Console.WriteLine(results[0].Name + "+" + results[1].Name);
 
             return (results);
         }
