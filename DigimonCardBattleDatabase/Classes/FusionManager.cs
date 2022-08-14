@@ -1,4 +1,6 @@
-﻿namespace DigimonCardBattleDatabase.Classes
+﻿using System.Text;
+
+namespace DigimonCardBattleDatabase.Classes
 {
     public class FusionManager
     {
@@ -91,12 +93,36 @@
 
             
             FilterCardList(cardDatabase);
-            if (targetCard.FusionMaterialCost > 0)
-            {
-                GenerateFusionRecipe(_fusionTree);
-            }
+            
         }
 
+        /// <summary>
+        /// Generates and returns a string containing the ingredient list for the fusion
+        /// </summary>
+        public string GetFusionRecipe()
+        {
+            if (_targetCard.FusionMaterialCost > 0)
+            {
+                GenerateFusionRecipe(_fusionTree);
+
+            }
+            string result = ParseFusionTree(_fusionTree);
+            return (result);
+        }
+
+        private string ParseFusionTree(FusionTree fusionTree)
+        {
+            StringBuilder resultSb = new StringBuilder();
+
+            Dictionary<string, int> entryCount = fusionTree.EntryCount();
+            foreach(KeyValuePair<string, int> entry in entryCount)
+            {
+                resultSb.Append (entry.Key + ":" + entry.Value+"\n");
+            }
+
+            return (resultSb.ToString());
+
+        }
         private void FilterCardList(DigimonCardData[] cardDatabase)
         {
             foreach (DigimonCardData card in cardDatabase)

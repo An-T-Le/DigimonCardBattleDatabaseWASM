@@ -13,6 +13,9 @@ else
   <div class="container" style="text-align:center;"> 
         
         <DigimonCardDataComponent CardData=CardData/>
-        
+        @if(fusionResult.Length > 0)
+        {
+            <p>@fusionResult</p>
+        }
     </div>
 }
